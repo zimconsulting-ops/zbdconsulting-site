@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brief received · ZBD Solutions</title>
+  <meta name="description" content="Your brief is in our queue. We respond with a scope and a quote within 48 hours.">
+  <meta name="robots" content="noindex">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --forest:        #1F4D2B;
+      --forest-depth:  #3A6F4C;
+      --cream:         #F5F0E1;
+      --charcoal:      #1A1A1A;
+      --amber:         #B8742C;
+      --cream-border:  #D9D2C0;
+      --muted:         #5C5C5C;
+      --font-display: 'Source Serif 4', Georgia, serif;
+      --font-body:    'Public Sans', system-ui, -apple-system, sans-serif;
+      --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+      --maxw: 760px;
+      --gutter: clamp(1.25rem, 4vw, 2rem);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.55;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); width: 100%; }
+
+    h1 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(2.2rem, 5vw, 3rem);
+      letter-spacing: -0.01em;
+      margin: 0 0 0.5em;
+    }
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 0.8rem;
+    }
+    .lede {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      max-width: 56ch;
+      margin: 0 0 1.4rem;
+    }
+    a { color: var(--forest); text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { color: var(--forest-depth); }
+
+    .site-header { border-bottom: 1px solid var(--cream-border); padding: 1.1rem 0; }
+    .site-header .container { max-width: 1180px; display: flex; align-items: center; justify-content: space-between; }
+    .wordmark {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.05rem;
+      text-decoration: none;
+      color: var(--charcoal);
+    }
+    .wordmark .dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--amber);
+      margin: 0 0.55rem 0.16rem;
+      vertical-align: middle;
+    }
+    .nav-links { display: flex; gap: 1.4rem; }
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--muted);
+    }
+    .nav-links a:hover { color: var(--forest); }
+
+    .panel {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: clamp(2.5rem, 8vw, 5rem) 0;
+    }
+    .next-steps {
+      background: rgba(31, 77, 43, 0.04);
+      border: 1px solid var(--cream-border);
+      padding: 1.2rem 1.4rem;
+      border-radius: 2px;
+      margin: 1.5rem 0;
+    }
+    .next-steps h3 {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--forest);
+      margin: 0 0 0.6rem;
+    }
+    .next-steps ol {
+      margin: 0;
+      padding-left: 1.4rem;
+    }
+    .next-steps li { margin-bottom: 0.4rem; }
+
+    .btn {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.95rem 1.5rem;
+      border-radius: 2px;
+      border: 1px solid var(--forest);
+      text-decoration: none;
+      background: var(--forest);
+      color: var(--cream);
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn:hover { background: var(--forest-depth); border-color: var(--forest-depth); color: var(--cream); }
+
+    .site-footer {
+      border-top: 1px solid var(--cream-border);
+      padding: 1.8rem 0;
+    }
+    .site-footer .container {
+      max-width: 1180px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-meta {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .site-footer .container { justify-content: center; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="wordmark">ZBD<span class="dot"></span>SOLUTIONS</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/#tools">Tools</a>
+        <a href="/#advisory">Advisory</a>
+        <a href="/#contractors">For contractors</a>
+        <a href="/">Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="panel">
+    <div class="container">
+      <div class="eyebrow">Brief received</div>
+      <h1>Got it. Talk soon.</h1>
+      <p class="lede">Your brief is in our queue. We respond within 48 hours with a scope and a quote.</p>
+
+      <div class="next-steps">
+        <h3>What happens next</h3>
+        <ol>
+          <li>Chris reads the brief end-to-end (typically same day).</li>
+          <li>If anything is unclear, we email back to clarify before quoting.</li>
+          <li>Within 48 hours you get a written scope, a fixed quote, and a target delivery window.</li>
+          <li>If it's a fit, we book a 15-minute kickoff. If it's not a fit, we tell you and recommend who is.</li>
+        </ol>
+      </div>
+
+      <p>If you don't see a reply within 48 hours (junk folder happens), email <a href="mailto:hello@zbdconsulting.com">hello@zbdconsulting.com</a> directly.</p>
+
+      <p><a class="btn" href="/">Back to the workshop</a></p>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-meta">ZBD Solutions · Wake County · NC</div>
+      <div>
+        <a href="mailto:hello@zbdconsulting.com">hello@zbdconsulting.com</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

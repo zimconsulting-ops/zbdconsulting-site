@@ -1,0 +1,11 @@
+# Netlify _redirects file. Specific entries (apex redirect, legacy paths)
+# go here. The catchall 404 is handled in netlify.toml.
+
+# Force apex -> www OR www -> apex (Netlify auto-handles after domain config;
+# uncomment one if needed):
+# https://www.zbdconsulting.com/*  https://zbdconsulting.com/:splat  301!
+# https://zbdconsulting.com/*      https://www.zbdconsulting.com/:splat  301!
+
+# Friendly aliases for the brief form
+/brief    /brief.html   200
+/thanks   /thanks.html  200

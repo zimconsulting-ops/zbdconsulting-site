@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Not found · ZBD Solutions</title>
+  <meta name="robots" content="noindex">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600&family=Public+Sans:wght@400;500&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --forest:        #1F4D2B;
+      --forest-depth:  #3A6F4C;
+      --cream:         #F5F0E1;
+      --charcoal:      #1A1A1A;
+      --amber:         #B8742C;
+      --cream-border:  #D9D2C0;
+      --muted:         #5C5C5C;
+      --font-display: 'Source Serif 4', Georgia, serif;
+      --font-body:    'Public Sans', system-ui, -apple-system, sans-serif;
+      --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.55;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 1.5rem;
+    }
+    .wrap { max-width: 540px; }
+    .code {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 0.6rem;
+    }
+    h1 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      letter-spacing: -0.01em;
+      margin: 0 0 0.7em;
+    }
+    p { margin: 0 0 1.4em; color: var(--charcoal); }
+    .btn {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.95rem 1.5rem;
+      border-radius: 2px;
+      border: 1px solid var(--forest);
+      text-decoration: none;
+      background: var(--forest);
+      color: var(--cream);
+      transition: background 0.15s;
+    }
+    .btn:hover { background: var(--forest-depth); border-color: var(--forest-depth); }
+    .wordmark {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      color: var(--charcoal);
+      text-decoration: none;
+      display: inline-block;
+    }
+    .wordmark .dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--amber);
+      margin: 0 0.55rem 0.16rem;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a href="/" class="wordmark">ZBD<span class="dot"></span>SOLUTIONS</a>
+    <div class="code">404 · Not found</div>
+    <h1>That page is not on the bench.</h1>
+    <p>The link you followed points somewhere that doesn't exist. Easiest fix is heading back to the workshop and starting from there.</p>
+    <a class="btn" href="/">Back to the workshop</a>
+  </div>
+</body>
+</html>

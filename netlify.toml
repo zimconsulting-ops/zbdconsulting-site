@@ -1,0 +1,29 @@
+# Netlify build configuration for zbdconsulting-site.
+# Static HTML, no build command needed.
+
+[build]
+  publish = "."
+
+# Force HTTPS + apex<->www unification handled by Netlify domain settings
+# (configure in panel after first deploy).
+
+# Cache headers for static assets
+[[headers]]
+  for = "/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "interest-cohort=()"
+
+# Custom 404 page
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
