@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZBD Solutions — Internal tools for Wake County contractors</title>
-  <meta name="description" content="Custom internal tools and operations advisory for Wake County contractors, trades, and field-services operators. One-time pricing. No subscriptions.">
+  <title>ZBD Solutions — AI agents deployed and managed for Wake County trades</title>
+  <meta name="description" content="Two products for Wake County trades: AI agents built into your workflow and managed monthly, and one-time custom tools you own outright.">
 
   <!-- OG / social -->
-  <meta property="og:title" content="ZBD Solutions — Three offerings, one workshop.">
-  <meta property="og:description" content="Internal tools and ops systems for Raleigh-area contractors that pay for themselves in 3-9 months. No subscriptions.">
+  <meta property="og:title" content="ZBD Solutions — Agents that run the work. Tools that stay yours.">
+  <meta property="og:description" content="AI agents built into your workflow and run for you monthly, plus one-time tools you own outright. Raleigh-area trades and field services.">
   <meta property="og:image" content="https://zbdconsulting.com/img/og.png">
   <meta property="og:url" content="https://zbdconsulting.com/">
   <meta property="og:type" content="website">
@@ -200,6 +200,62 @@
       border: 1px solid var(--cream-border);
       border-radius: 4px;
       filter: saturate(0.96);
+    }
+
+    /* ------------------------------------------------------------------
+       What it costs -- ranges
+       ------------------------------------------------------------------ */
+    .ranges {
+      padding: clamp(3rem, 6vw, 4.5rem) 0;
+      border-bottom: 1px solid var(--cream-border);
+    }
+    .range-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 860px) { .range-grid { grid-template-columns: 1fr; } }
+    .range-card {
+      border: 1px solid var(--cream-border);
+      border-radius: 4px;
+      padding: 1.5rem 1.6rem;
+      background: #FBF8EE;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .range-card .tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+    .range-card h3 { margin: 0.15rem 0 0.3rem; }
+    .range-price {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--forest);
+      margin-bottom: 0.5rem;
+      font-variant-numeric: tabular-nums;
+    }
+    .range-price span {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+    .range-card p { font-size: 0.95rem; color: var(--charcoal); margin: 0; }
+    .range-note {
+      margin-top: 1.5rem;
+      padding: 1rem 1.15rem;
+      border-left: 3px solid var(--amber);
+      background: #FBF8EE;
+      font-size: 0.95rem;
+      max-width: 68ch;
     }
 
     /* ------------------------------------------------------------------
@@ -545,8 +601,8 @@
     <div class="container">
       <div>
         <div class="eyebrow">ZBD · Wake County · NC</div>
-        <h1>Three offerings,<br>one workshop.</h1>
-        <p class="sub">Internal tools and operations advisory for Raleigh-area contractors, trades, and field-services operators. One-time pricing. Locally hosted. No subscriptions.</p>
+        <h1>Agents that run the work.<br>Tools that stay yours.</h1>
+        <p class="sub">Two products, one workshop. We build AI agents into how you already work and run them for you every month — and we still build one-time tools you buy once and own outright. Raleigh-area contractors, trades, and field services.</p>
         <div class="cta-row">
           <a class="btn btn-primary plausible-event-name=zbds-hero-primary" href="#quick-answer">Start with a Quick Answer · $89</a>
           <a class="btn btn-secondary plausible-event-name=zbds-hero-secondary" href="#tools">See the menu</a>
@@ -555,6 +611,48 @@
       <div>
         <img class="hero-image" src="img/hero.jpg" alt="A Wake County small-business owner at a workshop desk reviewing paperwork." width="1024" height="576">
       </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- WHAT IT COSTS  (ranges, not quotes -- see CLAUDE.md FDE ladder) -->
+  <!-- ============================================================ -->
+  <section class="ranges">
+    <div class="container">
+      <div class="eyebrow">01 &middot; What it costs</div>
+      <h2>Ranges, not quotes.</h2>
+      <p class="lede">Every business is shaped differently, so the number depends on what
+        the agent has to touch. These are the bands the work falls into.</p>
+
+      <div class="range-grid">
+        <div class="range-card">
+          <div class="tag">Step one</div>
+          <h3>Find the bottleneck</h3>
+          <div class="range-price">Free &rarr; $1,500&ndash;3,500</div>
+          <p>A short look costs nothing. The full readiness review maps one real workflow
+            end to end and shows what should be software, what should be an agent, and what
+            should stay a person.</p>
+        </div>
+        <div class="range-card">
+          <div class="tag">Step two</div>
+          <h3>Build and deploy it</h3>
+          <div class="range-price">$3,500&ndash;8,000</div>
+          <p>One workflow, running inside the systems you already use. No migration. Yours,
+            one time. A build that spans several workflows lands in the
+            <strong>$8,000&ndash;18,000</strong> range.</p>
+        </div>
+        <div class="range-card">
+          <div class="tag">Step three</div>
+          <h3>We run it for you</h3>
+          <div class="range-price">$750&ndash;2,500<span>/month</span></div>
+          <p>Watched, corrected and improved every month &mdash; the part that decides whether
+            an agent is still worth having in six months. Optional, and you can stop any month.</p>
+        </div>
+      </div>
+
+      <p class="range-note"><strong>Auto repair and dealerships:</strong> priced separately.
+        That is the vertical where twenty-five years on the bay side changes what the work
+        actually is, and the scope is worth a conversation rather than a band on a page.</p>
     </div>
   </section>
 
@@ -626,7 +724,7 @@
     <div class="container">
       <div class="menu-header">
         <div class="eyebrow">02 · The menu</div>
-        <h2>Three offerings, one workshop.</h2>
+        <h2>Two products, one workshop.</h2>
         <p class="lede">Pick the lane that fits your problem. Each has a clear scope, a flat price, and a written deliverable. No retainer traps. No vendor lock-in.</p>
       </div>
 
@@ -836,37 +934,37 @@
   <section class="vertical" id="contractors">
     <div class="container">
       <div class="eyebrow">04 · Built for contractors + trades</div>
-      <h2>Tools made for the work, not for the brochure.</h2>
-      <p class="lede">Construction, roofing, HVAC, electrical, landscaping, plumbing, painting, general contracting. If your business runs on jobs, crews, and change orders, these are the tools that come up first.</p>
+      <h2>The jobs an agent takes first.</h2>
+      <p class="lede">Construction, roofing, HVAC, electrical, landscaping, plumbing, painting, general contracting. If your business runs on jobs, crews, and change orders, these are the workflows worth handing over first — the repetitive middle, not the judgment calls.</p>
 
       <div class="vertical-grid">
         <div class="tool-card">
-          <div class="tag">Tool · 01</div>
+          <div class="tag">Agent · 01</div>
           <h3>Job Board + Dispatch</h3>
           <p>Active jobs, crew assignments, and same-day reassignments without a group text thread.</p>
         </div>
         <div class="tool-card">
-          <div class="tag">Tool · 02</div>
+          <div class="tag">Agent · 02</div>
           <h3>Estimate → Invoice Pipeline</h3>
           <p>From walk-around quote to signed work order to invoice. One trail, no re-typing.</p>
         </div>
         <div class="tool-card">
-          <div class="tag">Tool · 03</div>
+          <div class="tag">Agent · 03</div>
           <h3>Change Order Tracker</h3>
           <p>Scope changes get logged, priced, and approved in writing before the crew touches them.</p>
         </div>
         <div class="tool-card">
-          <div class="tag">Tool · 04</div>
+          <div class="tag">Agent · 04</div>
           <h3>Crew Scheduling</h3>
           <p>Who's on which site, which truck, which day. Owner sees the week at a glance.</p>
         </div>
         <div class="tool-card">
-          <div class="tag">Tool · 05</div>
+          <div class="tag">Agent · 05</div>
           <h3>Photo + Document Capture</h3>
           <p>Site photos, signed permits, inspection reports. Tied to the job, searchable later.</p>
         </div>
         <div class="tool-card">
-          <div class="tag">Tool · 06</div>
+          <div class="tag">Agent · 06</div>
           <h3>Job Costing Dashboard</h3>
           <p>What did the job actually cost? Labor + materials + change orders vs the estimate.</p>
         </div>
@@ -882,7 +980,7 @@
       <h2>Start with a Quick Answer.</h2>
       <p class="sub">$89, 20 minutes, one written recap. Decide in twenty minutes whether a tool makes sense for your business.</p>
       <a class="btn btn-primary plausible-event-name=zbds-cta-quick-answer" href="mailto:hello@zbdconsulting.com?subject=ZBD%20Solutions%20-%20Quick%20Answer%20(%2489)">Book your Quick Answer · $89</a>
-      <div class="meta">No subscription · No vendor lock-in · Wake County, NC</div>
+      <div class="meta">Runs on your existing systems · Cancel any month · Wake County, NC</div>
     </div>
   </section>
 
@@ -893,7 +991,7 @@
     <div class="container">
       <div>
         <div class="wordmark" style="margin-bottom: 0.5rem;">ZBD<span class="dot"></span>SOLUTIONS</div>
-        <div class="footer-tagline">Stop renting software. Own your tools.</div>
+        <div class="footer-tagline">Agents we run. Tools you own. One workshop.</div>
       </div>
       <div class="footer-links">
         <a href="#tools">Tools</a>
