@@ -203,6 +203,85 @@
     }
 
     /* ------------------------------------------------------------------
+       The install -- numbered because it IS a sequence
+       ------------------------------------------------------------------ */
+    .install {
+      padding: clamp(3rem, 6vw, 4.5rem) 0;
+      border-bottom: 1px solid var(--cream-border);
+    }
+    .steps {
+      list-style: none;
+      counter-reset: step;
+      margin: 2rem 0 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem 2.5rem;
+    }
+    @media (max-width: 760px) { .steps { grid-template-columns: 1fr; } }
+    .steps li {
+      counter-increment: step;
+      display: grid;
+      grid-template-columns: 2.1rem 1fr;
+      gap: 0 1rem;
+      align-items: start;
+    }
+    .steps li::before {
+      content: counter(step);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.5rem;
+      line-height: 1.1;
+      color: var(--amber);
+      font-variant-numeric: tabular-nums;
+      grid-row: span 2;
+    }
+    .steps h3 { margin: 0 0 0.3rem; }
+    .steps p { margin: 0; font-size: 0.95rem; }
+    .install-note,
+    .data-note {
+      margin-top: 2rem;
+      padding: 1rem 1.15rem;
+      border-left: 3px solid var(--forest);
+      background: #FBF8EE;
+      font-size: 0.98rem;
+      max-width: 70ch;
+    }
+
+    /* ------------------------------------------------------------------
+       Where the data lives
+       ------------------------------------------------------------------ */
+    .data {
+      padding: clamp(3rem, 6vw, 4.5rem) 0;
+      border-bottom: 1px solid var(--cream-border);
+    }
+    .data-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 860px) { .data-grid { grid-template-columns: 1fr; } }
+    .data-card {
+      border: 1px solid var(--cream-border);
+      border-top: 3px solid var(--forest);
+      border-radius: 4px;
+      padding: 1.4rem 1.5rem;
+      background: #FBF8EE;
+    }
+    .data-card .tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .data-card h3 { margin: 0 0 0.45rem; font-size: 1.1rem; }
+    .data-card p { margin: 0; font-size: 0.95rem; }
+
+    /* ------------------------------------------------------------------
        What it costs -- ranges
        ------------------------------------------------------------------ */
     .ranges {
@@ -615,11 +694,54 @@
   </section>
 
   <!-- ============================================================ -->
+  <!-- THE INSTALL -- the differentiator; nothing else on this page is hard to copy -->
+  <!-- ============================================================ -->
+  <section class="install">
+    <div class="container">
+      <div class="eyebrow">How it gets there</div>
+      <h2>Somebody drives over and installs it.</h2>
+      <p class="lede">Not a login. Not a trial. A machine on your network, wired to the
+        files you already have, set up by the person who will also be the one running it.</p>
+
+      <ol class="steps">
+        <li>
+          <h3>We come to you</h3>
+          <p>One day on site, in your building, with you in the room. Wake County and the
+            Triangle &mdash; close enough to come back when something needs a hand.</p>
+        </li>
+        <li>
+          <h3>It gets wired to your actual business</h3>
+          <p>Your spreadsheets, your customer database, your job files, your email. Not a
+            blank product you then have to feed &mdash; it starts already knowing how your
+            shop works, because we point it at how your shop works.</p>
+        </li>
+        <li>
+          <h3>Nothing is typed by hand</h3>
+          <p>Every step is a script that checks its own work and writes down what it did.
+            You double-click a file and read a plain verdict. If a step cannot verify
+            itself, it stops rather than guessing &mdash; which is the difference between a
+            setup that works and one that looks like it worked.</p>
+        </li>
+        <li>
+          <h3>Then we run it</h3>
+          <p>It gets watched, corrected and improved every month. When it breaks, you call
+            one person and that person already knows your setup.</p>
+        </li>
+      </ol>
+
+      <p class="install-note"><strong>Why this matters more than the software:</strong>
+        anyone can sell you a subscription to an AI tool. Almost nobody will drive out,
+        put it on your network, connect it to your files, and answer the phone when it
+        stops working on a Friday. That is the whole offer.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
   <!-- WHAT IT COSTS  (ranges, not quotes -- see CLAUDE.md FDE ladder) -->
   <!-- ============================================================ -->
   <section class="ranges">
     <div class="container">
-      <div class="eyebrow">01 &middot; What it costs</div>
+      <div class="eyebrow">What it costs</div>
       <h2>Ranges, not quotes.</h2>
       <p class="lede">Every business is shaped differently, so the number depends on what
         the agent has to touch. These are the bands the work falls into.</p>
@@ -969,6 +1091,48 @@
           <p>What did the job actually cost? Labor + materials + change orders vs the estimate.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- WHERE THE DATA LIVES -- the first objection every owner raises -->
+  <!-- ============================================================ -->
+  <section class="data">
+    <div class="container">
+      <div class="eyebrow">The question everybody asks</div>
+      <h2>&ldquo;So does my customer list end up at an AI company?&rdquo;</h2>
+      <p class="lede">Fair question, and the honest answer has two halves.</p>
+
+      <div class="data-grid">
+        <div class="data-card">
+          <div class="tag">Stays put</div>
+          <h3>Your files stay on your machine</h3>
+          <p>The customer list, the job history, the pricing, the documents &mdash; those
+            live on the box in your building, the same as they do now. We do not copy your
+            business onto somebody else's server to make this work.</p>
+        </div>
+        <div class="data-card">
+          <div class="tag">Goes out, on purpose</div>
+          <h3>The thinking happens at Claude</h3>
+          <p>When the agent needs to actually reason about something, it sends that piece
+            &mdash; and only that piece &mdash; to Anthropic's Claude and gets an answer
+            back. That part is not local, and anyone telling you otherwise is selling you
+            something slower and worse.</p>
+        </div>
+        <div class="data-card">
+          <div class="tag">Yours, not ours</div>
+          <h3>The account is in your name</h3>
+          <p>We set it up under <strong>your</strong> Anthropic account, with a spending
+            cap you choose. You see every dollar. You can change the password, cut our
+            access, or shut the whole thing off without asking us &mdash; and we would
+            rather you have that button than not.</p>
+        </div>
+      </div>
+
+      <p class="data-note"><strong>Everything it sends is written down.</strong> There is a
+        log of every request, on your machine, that you can read. If you ever want to know
+        what it looked at on a Tuesday, that is a question with an answer &mdash; not a
+        shrug.</p>
     </div>
   </section>
 
