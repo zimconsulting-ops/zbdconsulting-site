@@ -9,3 +9,7 @@
 # Friendly aliases for the brief form
 /brief    /brief.html   200
 /thanks   /thanks.html  200
+
+# Help request intake (Netlify form zbds-help)
+/help         /help.html         200
+/help-thanks  /help-thanks.html  200

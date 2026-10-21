@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ask for help · ZBD Solutions</title>
+  <meta name="description" content="Tell us what is wrong or what you want fixed. We read every request and reply within 2 business days. Start with a free Web &amp; Email Check.">
+
+  <!-- OG / social -->
+  <meta property="og:title" content="Ask for help · ZBD Solutions">
+  <meta property="og:description" content="Tell us what is wrong or what you want fixed. We read every request and reply within 2 business days.">
+  <meta property="og:image" content="https://zbdconsulting.com/img/og.png">
+  <meta property="og:url" content="https://zbdconsulting.com/help">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --forest:        #1F4D2B;
+      --forest-depth:  #3A6F4C;
+      --cream:         #F5F0E1;
+      --charcoal:      #1A1A1A;
+      --amber:         #B8742C;
+      --cream-border:  #D9D2C0;
+      --muted:         #5C5C5C;
+
+      --font-display: 'Source Serif 4', Georgia, serif;
+      --font-body:    'Public Sans', system-ui, -apple-system, sans-serif;
+      --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+
+      --maxw: 760px;
+      --gutter: clamp(1.25rem, 4vw, 2rem);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .container { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--charcoal);
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      margin: 0 0 0.5em;
+    }
+    h1 { font-size: clamp(2rem, 4.4vw, 2.8rem); }
+    h2 { font-size: clamp(1.3rem, 2.4vw, 1.6rem); }
+    p { margin: 0 0 1em; }
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .lede {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+      color: var(--charcoal);
+      max-width: 56ch;
+      margin-bottom: 1.5rem;
+    }
+    a { color: var(--forest); text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { color: var(--forest-depth); }
+
+    /* Header */
+    .site-header { border-bottom: 1px solid var(--cream-border); padding: 1.1rem 0; }
+    .site-header .container {
+      max-width: 1180px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .wordmark {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      color: var(--charcoal);
+    }
+    .wordmark .dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--amber);
+      margin: 0 0.55rem 0.16rem;
+      vertical-align: middle;
+    }
+    .nav-links { display: flex; gap: 1.4rem; }
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--muted);
+    }
+    .nav-links a:hover { color: var(--forest); }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.95rem 1.5rem;
+      border-radius: 2px;
+      border: 1px solid var(--forest);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-primary { background: var(--forest); color: var(--cream); }
+    .btn-primary:hover { background: var(--forest-depth); border-color: var(--forest-depth); color: var(--cream); }
+
+    /* Page intro */
+    .intro { padding: clamp(2.5rem, 6vw, 4rem) 0 1rem; }
+    .scope-box {
+      background: rgba(31, 77, 43, 0.04);
+      border: 1px solid var(--cream-border);
+      padding: 1.1rem 1.3rem;
+      border-radius: 2px;
+      margin: 1.4rem 0;
+    }
+    .scope-box h3 {
+      font-size: 0.85rem;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--forest);
+      margin-bottom: 0.5rem;
+    }
+    .scope-box ul { margin: 0; padding-left: 1.2rem; font-size: 0.95rem; }
+    .scope-box li { margin-bottom: 0.3rem; }
+
+    /* Form */
+    form.help-form { padding: 1rem 0 4rem; }
+    .field { margin-bottom: 1.3rem; }
+    .field label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      margin-bottom: 0.4rem;
+    }
+    .field .req { color: var(--amber); margin-left: 0.3rem; }
+    .field input[type="text"],
+    .field input[type="email"],
+    .field input[type="url"],
+    .field textarea,
+    .field select {
+      width: 100%;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--charcoal);
+      background: #FFFCF3;
+      border: 1px solid var(--cream-border);
+      border-radius: 2px;
+      padding: 0.7rem 0.85rem;
+      transition: border-color 0.15s;
+    }
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus { outline: none; border-color: var(--forest); }
+    .field textarea { min-height: 150px; resize: vertical; line-height: 1.5; }
+    .field .hint { display: block; font-size: 0.82rem; color: var(--muted); margin-top: 0.35rem; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .row .field { margin-bottom: 1.3rem; }
+    .consent {
+      display: flex;
+      gap: 0.7rem;
+      align-items: flex-start;
+      font-size: 0.95rem;
+    }
+    .consent input { margin-top: 0.3rem; width: 1.1rem; height: 1.1rem; flex: none; accent-color: var(--forest); }
+    .honeypot { position: absolute; left: -9999px; }
+    .submit-row { margin-top: 1.8rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .submit-row .response-note {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .privacy { font-size: 0.85rem; color: var(--muted); margin-top: 1rem; }
+
+    /* Footer */
+    .site-footer { border-top: 1px solid var(--cream-border); padding: 1.8rem 0; margin-top: 2rem; }
+    .site-footer .container {
+      max-width: 1180px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-meta {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .row { grid-template-columns: 1fr; gap: 0; }
+      .site-footer .container { justify-content: center; text-align: center; }
+      .btn { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="wordmark">ZBD<span class="dot"></span>SOLUTIONS</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/#tools">Tools</a>
+        <a href="/#advisory">Advisory</a>
+        <a href="/#contractors">For contractors</a>
+        <a href="/">Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- INTRO -->
+  <section class="intro">
+    <div class="container">
+      <div class="eyebrow">Ask for help · Wake County · NC</div>
+      <h1>Tell us what's wrong.</h1>
+      <p class="lede">Something about your business is slow, broken, or missing. Write it down and send it. A person reads it.</p>
+      <p>We read every request and reply within 2 business days. We take on the ones we can do well. If we are not the right fit, we say so and point you somewhere that is.</p>
+
+      <div class="scope-box">
+        <h3>What you get first</h3>
+        <ul>
+          <li>A free Web &amp; Email Check. We look at your website and your email setup and tell you what we see, in plain words.</li>
+          <li>No charge and no obligation. Anything after that is a separate conversation, with a price in writing first.</li>
+        </ul>
+      </div>
+
+      <div class="scope-box">
+        <h3>Who this is for</h3>
+        <ul>
+          <li>Independent auto businesses: repair, tire, body, detail, towing, used-car lots.</li>
+          <li>Other local businesses and nonprofits or local organizations. You are welcome to ask.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <div class="container">
+    <form name="zbds-help" method="POST" action="/help-thanks.html" class="help-form" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="zbds-help">
+      <p class="honeypot">
+        <label>Do not fill this out if you are human: <input name="bot-field"></label>
+      </p>
+
+      <div class="field">
+        <label for="business">Business name<span class="req">*</span></label>
+        <input type="text" id="business" name="business" required autocomplete="organization">
+      </div>
+
+      <div class="field">
+        <label for="business-type">Type of business<span class="req">*</span></label>
+        <select id="business-type" name="business-type" required>
+          <option value="">Pick one</option>
+          <option value="auto-repair">Auto repair</option>
+          <option value="tire-shop">Tire shop</option>
+          <option value="body-shop">Body shop</option>
+          <option value="detail">Detailing</option>
+          <option value="towing">Towing</option>
+          <option value="used-car-dealer">Used-car dealer</option>
+          <option value="other-local-business">Other local business</option>
+          <option value="nonprofit-org">Nonprofit or local organization</option>
+          <option value="other">Something else</option>
+        </select>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="location">Town and county<span class="req">*</span></label>
+          <input type="text" id="location" name="location" required placeholder="e.g. Wake Forest, Wake County">
+        </div>
+        <div class="field">
+          <label for="website">Website</label>
+          <input type="url" id="website" name="website" placeholder="https://" autocomplete="url">
+          <span class="hint">Optional. If you have none, leave it blank.</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="problem">What's wrong, or what do you want?<span class="req">*</span></label>
+        <textarea id="problem" name="problem" required placeholder="In your own words. What is not working, what is it costing you, and what would better look like?"></textarea>
+        <span class="hint">A few plain sentences are enough.</span>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="timing">How soon?<span class="req">*</span></label>
+          <select id="timing" name="timing" required>
+            <option value="">Pick one</option>
+            <option value="this-month">This month</option>
+            <option value="1-3-months">In 1-3 months</option>
+            <option value="exploring">Just exploring</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="budget">Rough budget</label>
+          <select id="budget" name="budget">
+            <option value="">Pick a range (optional)</option>
+            <option value="under-1000">Under $1,000</option>
+            <option value="1000-2500">$1,000 - $2,500</option>
+            <option value="2500-5000">$2,500 - $5,000</option>
+            <option value="5000-plus">$5,000+</option>
+            <option value="not-sure">Not sure</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="monthly">Would you pay monthly to keep it running and up to date?</label>
+        <select id="monthly" name="monthly">
+          <option value="">Pick one (optional)</option>
+          <option value="yes">Yes</option>
+          <option value="maybe">Maybe</option>
+          <option value="no">No</option>
+        </select>
+        <span class="hint">No wrong answer. It helps us know what kind of help to suggest.</span>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="name">Your name<span class="req">*</span></label>
+          <input type="text" id="name" name="name" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="email">Email<span class="req">*</span></label>
+          <input type="email" id="email" name="email" required autocomplete="email">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="consent" style="text-transform:none;letter-spacing:0;font-family:var(--font-body);font-weight:400;font-size:0.95rem;">
+          <input type="checkbox" id="consent" name="consent" value="yes" required>
+          <span>You may contact me by email about this request.<span class="req">*</span></span>
+        </label>
+      </div>
+
+      <div class="submit-row">
+        <button type="submit" class="btn btn-primary">Send request</button>
+        <span class="response-note">Reply within 2 business days</span>
+      </div>
+      <p class="privacy">We use what you send only to answer your request. We do not sell it or share it.</p>
+    </form>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-meta">ZBD Solutions · Wake County · NC</div>
+      <div>
+        <a href="mailto:hello@zbdconsulting.com">hello@zbdconsulting.com</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
