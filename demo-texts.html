@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Customer Texts Sample · ZBD Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600&family=Public+Sans:wght@400;600&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/demo-tools.css">
+  <style>
+    .bubble { background: #E4EEE5; border-radius: 14px 14px 14px 4px; padding: 10px 13px; margin: 8px 0; font-size: 0.95rem; white-space: pre-wrap; }
+    .when { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a href="/demo#tools">← Back to the demo</a><span class="sample">Sample</span></div>
+  <h1>Customer texts, ready to send</h1>
+  <p class="sub">The texts most shops send by hand, written once and filled in for you. One tap opens your Messages app with the text ready to send.</p>
+
+  <div class="row">
+    <div><label for="cust">Customer first name</label><input id="cust" value="Maria"></div>
+    <div><label for="biz">Your business</label><input id="biz" value="Sample Heating &amp; Air"></div>
+    <div><label for="tech">Who's coming</label><input id="tech" value="Dave"></div>
+  </div>
+  <label for="rev">Your Google review link</label>
+  <input id="rev" value="g.page/r/your-review-link">
+
+  <div class="list" id="list" style="margin-top:14px"></div>
+
+  <div class="foot">Sample wording. A real one uses your voice and your links, can show who is due for a tune-up, and is yours to keep. Texts go out from your own phone. Only text people who have said it's OK to text them, and stop when they ask.</div>
+</div>
+<script>
+(function () {
+  var T = [
+    ['Day before', 'Appointment reminder', 'Hi {c}, this is {b}. Reminder that {t} will be out tomorrow between 8 and 10 AM. Reply to confirm or reschedule.'],
+    ['On the way', 'Tech is on the way', 'Hi {c}, {t} from {b} is on the way and should be there in about 20 minutes.'],
+    ['Same day', 'Thank you + review', 'Thanks for having us out today, {c}. If you have a minute, a Google review helps a small local business a lot: {r}'],
+    ['3 days after quote', 'Quote follow-up', 'Hi {c}, {b} here. Just checking in on the quote we sent. Any questions, or want to pick a day?'],
+    ['6 months later', 'Tune-up due', 'Hi {c}, it\'s {b}. Your system is due for its seasonal tune-up. Want us to save you a spot next week?']
+  ];
+  function v(id) { return document.getElementById(id).value.trim(); }
+  function fill(s) { return s.replace(/{c}/g, v('cust') || 'there').replace(/{b}/g, v('biz')).replace(/{t}/g, v('tech') || 'our tech').replace(/{r}/g, v('rev')); }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function render() {
+    var list = document.getElementById('list'); list.innerHTML = '';
+    T.forEach(function (x) {
+      var it = el('div', 'item');
+      var left = el('div');
+      left.appendChild(el('div', 'when', x[0]));
+      left.appendChild(el('div', 't', x[1]));
+      var msg = fill(x[2]);
+      left.appendChild(el('div', 'bubble', msg));
+      it.appendChild(left);
+      var a = el('a', 'btn small', 'Text it');
+      a.href = 'sms:?&body=' + encodeURIComponent(msg);
+      it.appendChild(a);
+      list.appendChild(it);
+    });
+  }
+  ['cust', 'biz', 'tech', 'rev'].forEach(function (id) { document.getElementById(id).addEventListener('input', render); });
+  render();
+})();
+</script>
+</body>
+</html>

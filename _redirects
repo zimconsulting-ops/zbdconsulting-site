@@ -13,3 +13,10 @@
 # Help request intake (Netlify form zbds-help)
 /help         /help.html         200
 /help-thanks  /help-thanks.html  200
+
+# iPad demo (noindex, not in the sitemap)
+/demo         /demo.html         200
+/demo-jobs    /demo-jobs.html    200
+/demo-quote   /demo-quote.html   200
+/demo-texts   /demo-texts.html   200
+/demo-stock   /demo-stock.html   200

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Job Board Sample · ZBD Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600&family=Public+Sans:wght@400;600&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/demo-tools.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a href="/demo#tools">← Back to the demo</a><span class="sample">Sample data</span></div>
+  <h1>Sample Heating &amp; Air: job board</h1>
+  <p class="sub">Quotes, booked jobs and money owed, on one screen. Tap a job to move it along.</p>
+
+  <div class="tiles">
+    <div class="stat"><span class="n" id="sQuotes">$0</span><span class="l">Open quotes</span></div>
+    <div class="stat alert"><span class="n" id="sFollow">0</span><span class="l">Follow-ups due today</span></div>
+    <div class="stat"><span class="n" id="sBooked">0</span><span class="l">Jobs booked</span></div>
+    <div class="stat alert"><span class="n" id="sOwed">$0</span><span class="l">Done, not paid</span></div>
+  </div>
+
+  <div class="chips" id="chips"></div>
+  <div class="list" id="list"></div>
+
+  <details class="panel noprint">
+    <summary>Add a job</summary>
+    <div class="row">
+      <div><label for="nCust">Customer</label><input id="nCust" placeholder="e.g. Harris, Rolesville"></div>
+      <div><label for="nJob">Job</label><input id="nJob" placeholder="e.g. AC not cooling"></div>
+      <div><label for="nAmt">Amount ($)</label><input id="nAmt" type="number" inputmode="decimal" placeholder="450"></div>
+    </div>
+    <p style="margin-top:10px"><button class="btn" id="add">Add as a quote</button></p>
+  </details>
+
+  <div class="foot">
+    Sample data, made up for this demo. A real one is built around how your shop already works, runs on your phone or computer, and is yours to keep.
+    <p class="noprint" style="margin-top:8px"><button class="btn ghost small" id="reset">Reset the sample</button></p>
+  </div>
+</div>
+<script>
+(function () {
+  var KEY = 'zbds-demo-jobs-v1';
+  var STAGES = ['Quote sent', 'Booked', 'Done', 'Paid'];
+  function day(n) { var d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() + n); return d.getTime(); }
+  function sample() {
+    return [
+      { c: 'Patel, Wake Forest', j: 'Heat pump replacement, 3 ton', a: 8900, s: 0, f: day(0) },
+      { c: 'Moore, Youngsville', j: 'Furnace not lighting', a: 385, s: 0, f: day(-2) },
+      { c: 'Greene, Rolesville', j: 'Duct cleaning, whole house', a: 650, s: 0, f: day(3) },
+      { c: 'Lopez, Knightdale', j: 'Fall tune-up', a: 129, s: 1, f: day(1) },
+      { c: 'Baker, Wake Forest', j: 'Thermostat install', a: 240, s: 1, f: day(2) },
+      { c: 'Hill, Raleigh', j: 'Capacitor and contactor', a: 310, s: 2, f: day(-1) },
+      { c: 'Turner, Franklinton', j: 'Refrigerant leak repair', a: 1150, s: 2, f: day(-5) },
+      { c: 'Ward, Wake Forest', j: 'Fall tune-up', a: 129, s: 3, f: null }
+    ];
+  }
+  // Fresh sample on every load: nothing typed is kept on a shared iPad, and dates never go stale.
+  var jobs = sample(), filter = -1;
+  function save() {}
+  function money(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+  function when(t) {
+    if (t == null) return '';
+    var d = Math.round((t - day(0)) / 864e5);
+    return d === 0 ? 'today' : d < 0 ? (-d) + (d === -1 ? ' day' : ' days') + ' late' : 'in ' + d + (d === 1 ? ' day' : ' days');
+  }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function render() {
+    var q = 0, f = 0, b = 0, o = 0;
+    jobs.forEach(function (x) {
+      if (x.s === 0) q += x.a;
+      if (x.s === 1) b++;
+      if (x.s === 2) o += x.a;
+      if (x.s < 3 && x.f != null && x.f <= day(0)) f++;
+    });
+    document.getElementById('sQuotes').textContent = money(q);
+    document.getElementById('sFollow').textContent = f;
+    document.getElementById('sBooked').textContent = b;
+    document.getElementById('sOwed').textContent = money(o);
+
+    var chips = document.getElementById('chips'); chips.innerHTML = '';
+    [['All', -1]].concat(STAGES.map(function (s, i) { return [s, i]; })).forEach(function (c) {
+      var n = c[1] === -1 ? jobs.length : jobs.filter(function (x) { return x.s === c[1]; }).length;
+      var b = el('button', 'chip', c[0] + ' (' + n + ')');
+      b.setAttribute('aria-pressed', filter === c[1]);
+      b.onclick = function () { filter = c[1]; render(); };
+      chips.appendChild(b);
+    });
+
+    var list = document.getElementById('list'); list.innerHTML = '';
+    jobs.map(function (x, i) { return [x, i]; })
+      .filter(function (p) { return filter === -1 || p[0].s === filter; })
+      .sort(function (a, b) { return a[0].s - b[0].s || (a[0].f || 9e15) - (b[0].f || 9e15); })
+      .forEach(function (p) {
+        var x = p[0], i = p[1];
+        var it = el('div', 'item');
+        var left = el('div');
+        var t = el('div', 't', x.j);
+        var due = x.s < 3 && x.f != null && x.f <= day(0);
+        if (due) t.appendChild(el('span', 'flag', x.s === 0 ? 'Call back' : x.s === 2 ? 'Collect' : 'Today'));
+        if (x.s === 3) t.appendChild(el('span', 'flag ok', 'Paid'));
+        left.appendChild(t);
+        var meta = x.c + ' · ' + STAGES[x.s];
+        if (x.s < 3 && x.f != null) {
+          var w = when(x.f);
+          meta += ' · ' + (x.s === 0 ? 'follow up ' + w : x.s === 1 ? 'job ' + w : 'invoice ' + (/late/.test(w) ? w.replace('late', 'past due') : 'due ' + w));
+        }
+        left.appendChild(el('div', 'm', meta));
+        it.appendChild(left);
+        it.appendChild(el('div', 'amt', money(x.a)));
+        var acts = el('div', 'acts noprint');
+        if (x.s < 3) {
+          var nx = el('button', 'btn small', 'Mark ' + STAGES[x.s + 1].toLowerCase());
+          nx.onclick = function () { x.s++; x.f = x.s === 1 ? day(2) : x.s === 2 ? day(14) : null; save(); render(); };
+          acts.appendChild(nx);
+        }
+        if (x.s === 0 || x.s === 2) {
+          var msg = x.s === 0
+            ? 'Hi, this is Sample Heating & Air following up on the quote for ' + x.j.toLowerCase() + '. Any questions, or want to get it on the schedule?'
+            : 'Hi, this is Sample Heating & Air. Thanks again for having us out. A friendly reminder that the invoice for ' + x.j.toLowerCase() + ' (' + money(x.a) + ') is open.';
+          var tx = el('a', 'btn ghost small', 'Text a reminder');
+          tx.href = 'sms:?&body=' + encodeURIComponent(msg);
+          acts.appendChild(tx);
+        }
+        it.appendChild(acts);
+        list.appendChild(it);
+      });
+  }
+  document.getElementById('add').onclick = function () {
+    var c = document.getElementById('nCust').value.trim(), j = document.getElementById('nJob').value.trim(), a = parseFloat(document.getElementById('nAmt').value);
+    if (!c || !j) return;
+    jobs.push({ c: c, j: j, a: isFinite(a) ? a : 0, s: 0, f: day(2) });
+    ['nCust', 'nJob', 'nAmt'].forEach(function (id) { document.getElementById(id).value = ''; });
+    save(); filter = -1; render();
+  };
+  document.getElementById('reset').onclick = function () { jobs = sample(); save(); filter = -1; render(); };
+  render();
+})();
+</script>
+</body>
+</html>

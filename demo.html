@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Quick Check · ZBD Solutions</title>
+  <meta name="description" content="A two-minute look at how customers find your business and whether your email can be faked.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,600;1,400&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --forest: #1F4D2B; --forest-depth: #3A6F4C; --cream: #F5F0E1; --charcoal: #1A1A1A;
+      --amber: #B8742C; --line: #D9D2C0; --muted: #5C5C5C; --card: #FBF8EE;
+      --bad: #8A2D1F; --warn: #8A5A12; --good: #1F4D2B;
+      --display: 'Source Serif 4', Georgia, serif;
+      --body: 'Public Sans', system-ui, -apple-system, sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: var(--cream); color: var(--charcoal); font-family: var(--body); font-size: 18px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 18px 20px 110px; }
+    header { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+    .brand { font-family: var(--display); font-weight: 600; font-size: 1.2rem; color: var(--forest); text-decoration: none; }
+    .brand span { color: var(--amber); }
+    .steps { display: flex; gap: 6px; flex-wrap: wrap; }
+    .steps button { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--line); background: transparent; color: var(--muted); padding: 7px 10px; border-radius: 999px; cursor: pointer; }
+    .steps button[aria-current="step"] { background: var(--forest); border-color: var(--forest); color: #fff; }
+    .eyebrow { font-family: var(--mono); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin: 26px 0 6px; }
+    h1 { font-family: var(--display); font-weight: 600; font-size: clamp(1.9rem, 5vw, 2.7rem); line-height: 1.12; margin: 0 0 10px; }
+    h2 { font-family: var(--display); font-weight: 600; font-size: 1.3rem; margin: 22px 0 8px; }
+    .lede { font-family: var(--display); font-style: italic; font-size: 1.15rem; margin: 0 0 18px; max-width: 58ch; }
+    section[hidden] { display: none; }
+    label { display: block; font-weight: 600; font-size: 0.95rem; margin: 12px 0 4px; }
+    input, select { width: 100%; font: inherit; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--charcoal); }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 560px) { .row { grid-template-columns: 1fr; } }
+    .links { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-top: 14px; }
+    .tile { display: block; text-decoration: none; color: var(--charcoal); background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+    .tile b { display: block; font-size: 1.02rem; color: var(--forest); }
+    .tile small { color: var(--muted); }
+    .tile[aria-disabled="true"] { opacity: 0.45; pointer-events: none; }
+    .btn { display: inline-block; font: inherit; font-weight: 600; background: var(--forest); color: #fff; border: 0; border-radius: 8px; padding: 13px 20px; cursor: pointer; text-decoration: none; }
+    .btn.ghost { background: transparent; color: var(--forest); border: 1px solid var(--forest); }
+    .btn:disabled { opacity: 0.5; }
+    .results { margin-top: 16px; display: grid; gap: 10px; }
+    .res { background: var(--card); border: 1px solid var(--line); border-left: 6px solid var(--line); border-radius: 8px; padding: 12px 14px; }
+    .res.good { border-left-color: var(--good); } .res.warn { border-left-color: var(--warn); } .res.bad { border-left-color: var(--bad); }
+    .res b { display: block; }
+    .res .tag { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; }
+    .res.good .tag { color: var(--good); } .res.warn .tag { color: var(--warn); } .res.bad .tag { color: var(--bad); }
+    .res small { color: var(--muted); display: block; margin-top: 4px; }
+    ul.plain { padding-left: 1.1em; margin: 8px 0 0; } ul.plain li { margin-bottom: 8px; }
+    .note { font-size: 0.9rem; color: var(--muted); margin-top: 14px; }
+    .say { display: none; margin-top: 18px; background: #FFF6E2; border: 1px dashed var(--amber); border-radius: 8px; padding: 12px 14px; font-size: 0.95rem; }
+    body.notes .say { display: block; }
+    .say::before { content: "Say"; display: block; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--amber); margin-bottom: 4px; }
+    nav.bar { position: fixed; left: 0; right: 0; bottom: 0; background: var(--cream); border-top: 1px solid var(--line); padding: 12px 20px calc(12px + env(safe-area-inset-bottom)); }
+    nav.bar .in { max-width: 860px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+    .toggle { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; background: none; border: 0; color: var(--muted); cursor: pointer; padding: 8px; }
+    .qr { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; margin-top: 12px; }
+    .qr img { width: 150px; height: 150px; background: #fff; padding: 8px; border: 1px solid var(--line); border-radius: 8px; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="/">ZBD<span>·</span>Solutions</a>
+    <div class="steps" role="tablist" aria-label="Steps">
+      <button data-go="0">1 · Found</button>
+      <button data-go="1">2 · Email</button>
+      <button data-go="2">3 · A tool</button>
+      <button data-go="3">4 · Next</button>
+    </div>
+  </header>
+
+  <!-- STEP 1 -->
+  <section data-step="0">
+    <div class="eyebrow">Step 1 · Can customers find you?</div>
+    <h1>Search the way your customers do.</h1>
+    <p class="lede">Type your business and your town. Then we look it up together, right now.</p>
+    <label for="biz">Business name</label>
+    <input id="biz" autocomplete="off" placeholder="e.g. Your Business Name">
+    <div class="row">
+      <div><label for="trade">What you do</label><input id="trade" autocomplete="off" placeholder="e.g. HVAC repair" list="trades"></div>
+      <div><label for="town">Town</label><input id="town" autocomplete="off" placeholder="e.g. Wake Forest"></div>
+    </div>
+    <datalist id="trades"><option value="HVAC repair"><option value="plumber"><option value="roofer"><option value="electrician"><option value="landscaping"><option value="lawn care"><option value="gift shop"><option value="auto repair"></datalist>
+    <div class="links" id="links"></div>
+    <div class="say">"Let's see what a customer sees when they search for you. Are you in the first few? Is your phone number and your hours right? Now the same question asked to an AI assistant. Some people now ask an AI assistant instead of scrolling Google."</div>
+  </section>
+
+  <!-- STEP 2 -->
+  <section data-step="1" hidden>
+    <div class="eyebrow">Step 2 · Can someone fake your email?</div>
+    <h1>Can someone send email in your name?</h1>
+    <p class="lede">Fake invoices and fake "change our payment details" emails are a common scam. A few public settings affect how easy it is.</p>
+    <label for="domain">Your website or email address</label>
+    <input id="domain" autocomplete="off" autocapitalize="off" inputmode="url" placeholder="e.g. yourbusiness.com or office@yourbusiness.com">
+    <p style="margin-top:12px"><button class="btn" id="run">Check it</button></p>
+    <div class="results" id="results" aria-live="polite"></div>
+    <p class="note">This reads only public settings anyone can look up. It does not touch your email account or website.</p>
+    <div class="say">"These are public records. Anyone can look them up, including scammers. Green means it's set up. Red means someone could send an email that looks like it came from you, to your customers or your supplier."</div>
+  </section>
+
+  <!-- STEP 3 -->
+  <section data-step="2" hidden>
+    <div class="eyebrow" id="tools">Step 3 · Tools built for one business</div>
+    <h1>Small tools built around one business.</h1>
+    <p class="lede">Four samples. Tap one and try it. Each works on a phone or tablet.</p>
+    <div class="links">
+      <a class="tile" href="/demo-jobs"><b>Job board</b><small>Open quotes, who to call back today, and what's done but not paid.</small></a>
+      <a class="tile" href="/demo-quote"><b>Quote builder</b><small>Tap the work, get a clean quote. Print it or text it from the driveway.</small></a>
+      <a class="tile" href="/demo-texts"><b>Customer texts</b><small>Reminders, thank-yous and review requests, filled in and ready to send.</small></a>
+      <a class="tile" href="/demo-stock"><b>Stock and reorder</b><small>For shops: what's running low, and the order for each supplier.</small></a>
+    </div>
+    <p class="note">These are samples with made-up data. Yours would be built around how you already work, and you buy it once and own it.</p>
+    <div class="say">"How do you keep track of quotes you've sent? Most owners I talk to keep it in their head, on paper, or in texts. Pick the one closest to your headache. Yours would match how you already do it."</div>
+  </section>
+
+  <!-- STEP 4 -->
+  <section data-step="3" hidden>
+    <div class="eyebrow">Step 4 · What happens next</div>
+    <h1>Start with the free check.</h1>
+    <p class="lede">We write up a one-page report on your website and email. Facts only, no scores.</p>
+    <ul class="plain">
+      <li><b>Free, no obligation.</b> You get the report either way.</li>
+      <li><b>Price in writing first.</b> If you want something fixed or built, you see the price before any work starts.</li>
+      <li><b>A person replies</b> within 2 business days. If we're not the right fit, we say so.</li>
+    </ul>
+    <div class="qr">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=0&data=https%3A%2F%2Fzbdconsulting.com%2Fhelp" alt="QR code for zbdconsulting.com/help" width="150" height="150">
+      <div><b>zbdconsulting.com/help</b><br><small>Scan to ask for the free check, or use the card.</small></div>
+    </div>
+    <p style="margin-top:16px"><a class="btn ghost" href="/help">Fill it out together now</a></p>
+    <div class="say">"Here's my card. Same code is on the back. If you want, we can fill it in right now, takes two minutes. Either way you'll hear back from a person."</div>
+  </section>
+</div>
+
+<nav class="bar">
+  <div class="in">
+    <button class="btn ghost" id="back">Back</button>
+    <button class="toggle" id="notesBtn" aria-pressed="false">Notes off</button>
+    <button class="btn" id="next">Next</button>
+  </div>
+</nav>
+
+<script>
+(function () {
+  var steps = document.querySelectorAll('section[data-step]');
+  var pills = document.querySelectorAll('.steps button');
+  var cur = 0;
+  function show(i) {
+    cur = Math.max(0, Math.min(steps.length - 1, i));
+    steps.forEach(function (s, n) { s.hidden = n !== cur; });
+    pills.forEach(function (p, n) { if (n === cur) p.setAttribute('aria-current', 'step'); else p.removeAttribute('aria-current'); });
+    document.getElementById('back').disabled = cur === 0;
+    document.getElementById('next').textContent = cur === steps.length - 1 ? 'Start over' : 'Next';
+    window.scrollTo(0, 0);
+  }
+  pills.forEach(function (p) { p.addEventListener('click', function () { show(+p.dataset.go); }); });
+  document.getElementById('back').addEventListener('click', function () { show(cur - 1); });
+  document.getElementById('next').addEventListener('click', function () {
+    if (cur === steps.length - 1) { ['biz', 'trade', 'town', 'domain'].forEach(function (id) { document.getElementById(id).value = ''; }); document.getElementById('results').innerHTML = ''; links(); show(0); }
+    else show(cur + 1);
+  });
+  var nb = document.getElementById('notesBtn');
+  nb.addEventListener('click', function () {
+    var on = document.body.classList.toggle('notes');
+    nb.textContent = on ? 'Notes on' : 'Notes off'; nb.setAttribute('aria-pressed', on);
+  });
+
+  // Step 1: search links
+  function v(id) { return document.getElementById(id).value.trim(); }
+  function q(s) { return encodeURIComponent(s); }
+  function links() {
+    var biz = v('biz'), trade = v('trade'), town = v('town');
+    var place = town ? town + ' NC' : 'Wake County NC';
+    var t = trade || 'contractor';
+    var items = [
+      ['Google: ' + t + ' near ' + place, 'What a new customer sees', 'https://www.google.com/search?q=' + q(t + ' near ' + place), true],
+      ['Google Maps', 'The map and the top 3', 'https://www.google.com/maps/search/' + q(t + ' near ' + place), true],
+      ['Ask ChatGPT', 'Who it recommends', 'https://chatgpt.com/?q=' + q('Who are the best ' + t + ' companies in ' + place + '? List names and phone numbers.'), true],
+      ['Ask Perplexity', 'Same question, another AI', 'https://www.perplexity.ai/search?q=' + q('Best ' + t + ' companies in ' + place), true],
+      ['Google your name', biz ? 'Your listing, hours, reviews' : 'Type the business name first', 'https://www.google.com/search?q=' + q(biz + ' ' + place), !!biz]
+    ];
+    var box = document.getElementById('links'); box.innerHTML = '';
+    items.forEach(function (it) {
+      var a = document.createElement('a');
+      a.className = 'tile'; a.href = it[2]; a.target = '_blank'; a.rel = 'noopener';
+      if (!it[3]) a.setAttribute('aria-disabled', 'true');
+      var b = document.createElement('b'); b.textContent = it[0];
+      var s = document.createElement('small'); s.textContent = it[1];
+      a.appendChild(b); a.appendChild(s); box.appendChild(a);
+    });
+  }
+  ['biz', 'trade', 'town'].forEach(function (id) { document.getElementById(id).addEventListener('input', links); });
+  links();
+
+  // Step 2: public DNS check (Google DNS-over-HTTPS)
+  var FREE = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'aol.com', 'icloud.com', 'live.com', 'msn.com', 'att.net', 'bellsouth.net', 'comcast.net'];
+  function clean(s) {
+    s = s.trim().toLowerCase();
+    if (s.indexOf('@') > -1) s = s.split('@').pop();
+    s = s.replace(/^[a-z]+:\/\//, '').replace(/^www\./, '').split(/[\/?#:\s]/)[0];
+    return /^[a-z0-9-]+(\.[a-z0-9-]+)+$/.test(s) ? s : '';
+  }
+  function txt(name) {
+    return fetch('https://dns.google/resolve?name=' + q(name) + '&type=TXT', { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { return (j.Answer || []).filter(function (a) { return a.type === 16; }).map(function (a) { return a.data.replace(/^"|"$/g, '').replace(/" "/g, ''); }); });
+  }
+  function anyRec(name, type) {
+    return fetch('https://dns.google/resolve?name=' + q(name) + '&type=' + type, { cache: 'no-store' })
+      .then(function (r) { return r.json(); }).then(function (j) { return (j.Answer || []).length > 0; });
+  }
+  function siteAnswers(d) {
+    var done = false;
+    return new Promise(function (res) {
+      var t = setTimeout(function () { if (!done) { done = true; res(false); } }, 8000);
+      fetch('https://' + d + '/', { mode: 'no-cors', cache: 'no-store' })
+        .then(function () { if (!done) { done = true; clearTimeout(t); res(true); } })
+        .catch(function () { if (!done) { done = true; clearTimeout(t); res(false); } });
+    });
+  }
+  function card(kind, tag, head, detail) {
+    var d = document.createElement('div'); d.className = 'res ' + kind;
+    var a = document.createElement('span'); a.className = 'tag'; a.textContent = tag;
+    var b = document.createElement('b'); b.textContent = head;
+    d.appendChild(a); d.appendChild(b);
+    if (detail) { var s = document.createElement('small'); s.textContent = detail; d.appendChild(s); }
+    return d;
+  }
+  var run = document.getElementById('run'), out = document.getElementById('results');
+  function check() {
+    var d = clean(v('domain'));
+    out.innerHTML = '';
+    if (!d) { out.appendChild(card('warn', 'Check the spelling', 'Type a website like yourbusiness.com or an email address.', '')); return; }
+    if (FREE.indexOf(d) > -1) {
+      out.appendChild(card('warn', 'Free email address', 'You use ' + d + ' for business email.', 'That works, but anyone can open a look-alike address in a minute, and customers can\'t tell which is real. An address on your own domain (you@yourbusiness.com) can be protected. A free one can\'t.'));
+      return;
+    }
+    run.disabled = true; run.textContent = 'Checking ' + d + '…';
+    Promise.all([txt(d), txt('_dmarc.' + d), anyRec(d, 'MX'), siteAnswers(d)]).then(function (r) {
+      var spf = r[0].filter(function (x) { return /^v=spf1/i.test(x); })[0];
+      var dm = r[1].filter(function (x) { return /^v=dmarc1/i.test(x); })[0];
+      var mx = r[2], site = r[3];
+      var pol = dm ? ((dm.match(/;\s*p\s*=\s*(\w+)/i) || [])[1] || 'none').toLowerCase() : null;
+      if (!dm) out.appendChild(card('bad', 'Not set up', 'No spoofing protection (DMARC) found.', 'An email that looks like it came from @' + d + ' may still get delivered, even if a scammer sent it.'));
+      else if (pol === 'none') out.appendChild(card('warn', 'Watching only', 'Spoofing protection is set to "watch only".', 'Fake emails in your name may still get delivered. The usual next step is a stricter setting, after checking that all your real senders are listed.'));
+      else out.appendChild(card('good', 'Set up', pol === 'reject' ? 'Spoofing protection is on. Fakes that use your name are told to be blocked.' : 'Spoofing protection is on. Suspicious mail in your name is sent to spam.', ''));
+      if (spf) out.appendChild(card('good', 'Set up', 'There is a list of who may send email for you (SPF).', ''));
+      else out.appendChild(card('bad', 'Missing', 'No list of who may send email for you (SPF).', 'Without it, mail providers have a harder time telling your real email from a fake.'));
+      out.appendChild(mx ? card('good', 'Found', 'Your domain receives email.', '') : card('warn', 'Not found', 'No email service found on this domain.', 'If you use a different address for email, check that one too.'));
+      out.appendChild(site ? card('good', 'Answers', 'Your website answers over a secure (https) connection.', '') : card('warn', 'No answer', 'We could not reach https://' + d + ' within 8 seconds.', 'Try it with www in front. If that fails too, the site may be down, slow, or missing a security certificate.'));
+    }).catch(function () {
+      out.appendChild(card('warn', 'No connection', 'Could not reach the lookup service.', 'Check the hotspot and try again.'));
+    }).then(function () { run.disabled = false; run.textContent = 'Check it'; });
+  }
+  run.addEventListener('click', check);
+  document.getElementById('domain').addEventListener('keydown', function (e) { if (e.key === 'Enter') check(); });
+
+  show(location.hash === '#tools' ? 2 : 0);
+})();
+</script>
+</body>
+</html>

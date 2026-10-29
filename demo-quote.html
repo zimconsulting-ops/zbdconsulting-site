@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Quote Builder Sample · ZBD Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600&family=Public+Sans:wght@400;600&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/demo-tools.css">
+  <style>
+    .pick { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 8px; }
+    .pick button { text-align: left; font: inherit; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; cursor: pointer; color: var(--charcoal); }
+    .pick button b { display: block; } .pick button small { color: var(--muted); }
+    .pick button.on { border-color: var(--forest); box-shadow: inset 0 0 0 2px var(--forest); }
+    .quote table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .quote td { padding: 7px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .quote td:last-child { text-align: right; white-space: nowrap; }
+    .quote .total td { font-family: var(--display); font-weight: 600; font-size: 1.2rem; border-bottom: 0; }
+    .opt { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top noprint"><a href="/demo#tools">← Back to the demo</a><span class="sample">Sample prices</span></div>
+  <h1 class="noprint">Quote builder</h1>
+  <p class="sub noprint">Tap the work, get a clean quote in seconds. Print it, save it as a PDF, or text it before you leave the driveway.</p>
+
+  <div class="noprint">
+    <div class="row">
+      <div><label for="cust">Customer</label><input id="cust" value="Patel family"></div>
+      <div><label for="addr">Job address</label><input id="addr" value="Wake Forest, NC"></div>
+    </div>
+    <h2>Pick the work</h2>
+    <div class="pick" id="pick"></div>
+  </div>
+
+  <div class="panel quote" id="quote">
+    <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
+      <div><b style="font-family:var(--display);font-size:1.2rem">Sample Heating &amp; Air</b><br><small>Quote for <span id="qCust"></span>, <span id="qAddr"></span></small></div>
+      <div style="text-align:right"><span class="sample">Sample</span><br><small>Date: <span id="qDate"></span><br>Good for 30 days</small></div>
+    </div>
+    <table id="lines"></table>
+    <p style="margin-top:10px;font-size:0.9rem"><b>Options:</b> <span id="qOpts">pick work above</span></p>
+    <p style="font-size:0.85rem;color:var(--muted)">Price includes parts and labor listed. Anything extra is quoted in writing before we do it.</p>
+  </div>
+
+  <div class="opt noprint">
+    <button class="btn" onclick="window.print()">Print or save PDF</button>
+    <a class="btn ghost" id="text" href="#">Text it to the customer</a>
+  </div>
+
+  <div class="foot noprint">Sample prices, made up for this demo. A real one uses your own price book and your logo, and is yours to keep.</div>
+</div>
+<script>
+(function () {
+  var BOOK = [
+    { n: 'Diagnostic visit', d: 'Find the problem, written findings', p: 95 },
+    { n: 'Fall tune-up', d: 'Clean, test, check refrigerant', p: 129 },
+    { n: 'Capacitor replacement', d: 'Part and labor', p: 185 },
+    { n: 'Smart thermostat install', d: 'Customer-supplied or ours', p: 240 },
+    { n: 'Duct cleaning, whole house', d: 'Up to 12 vents', p: 650 },
+    { n: 'Refrigerant leak repair', d: 'Find, seal, recharge', p: 1150 },
+    { n: 'Heat pump replacement, 3 ton', d: 'Remove old, install, haul away', p: 8900 }
+  ];
+  var on = [1, 2];
+  function money(n) { return '$' + n.toLocaleString('en-US'); }
+  function el(tag, text) { var e = document.createElement(tag); if (text != null) e.textContent = text; return e; }
+  var pick = document.getElementById('pick');
+  BOOK.forEach(function (b, i) {
+    var btn = document.createElement('button');
+    btn.appendChild(el('b', b.n + ' · ' + money(b.p)));
+    btn.appendChild(el('small', b.d));
+    btn.onclick = function () { var k = on.indexOf(i); if (k > -1) on.splice(k, 1); else on.push(i); render(); };
+    pick.appendChild(btn);
+  });
+  function render() {
+    var btns = pick.querySelectorAll('button');
+    BOOK.forEach(function (b, i) { btns[i].classList.toggle('on', on.indexOf(i) > -1); });
+    document.getElementById('qCust').textContent = document.getElementById('cust').value || 'customer';
+    document.getElementById('qAddr').textContent = document.getElementById('addr').value || '';
+    document.getElementById('qDate').textContent = new Date().toLocaleDateString('en-US');
+    var t = document.getElementById('lines'); t.innerHTML = '';
+    var sum = 0;
+    on.slice().sort(function (a, b) { return a - b; }).forEach(function (i) {
+      var b = BOOK[i]; sum += b.p;
+      var tr = el('tr'); var td = el('td'); td.appendChild(el('b', b.n)); td.appendChild(el('br')); var s = el('small', b.d); td.appendChild(s);
+      tr.appendChild(td); tr.appendChild(el('td', money(b.p))); t.appendChild(tr);
+    });
+    var tot = el('tr'); tot.className = 'total'; tot.appendChild(el('td', 'Total')); tot.appendChild(el('td', money(sum))); t.appendChild(tot);
+    document.getElementById('qOpts').textContent = sum >= 1000 ? 'pay in full, or half to schedule and half when done.' : 'pay when the job is done. Card, check or Zelle.';
+    var body = 'Hi ' + (document.getElementById('cust').value || '') + ', here is your quote from Sample Heating & Air: ' +
+      on.map(function (i) { return BOOK[i].n + ' ' + money(BOOK[i].p); }).join(', ') + '. Total ' + money(sum) + '. Good for 30 days. Reply YES to get on the schedule.';
+    document.getElementById('text').href = 'sms:?&body=' + encodeURIComponent(body);
+  }
+  document.getElementById('cust').oninput = render;
+  document.getElementById('addr').oninput = render;
+  render();
+})();
+</script>
+</body>
+</html>

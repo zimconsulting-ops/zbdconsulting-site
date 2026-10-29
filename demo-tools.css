@@ -1,0 +1,44 @@
+/* Shared styles for the /demo sample tools. ZBDS locked palette. */
+:root {
+  --forest: #1F4D2B; --forest-depth: #3A6F4C; --cream: #F5F0E1; --charcoal: #1A1A1A;
+  --amber: #B8742C; --line: #D9D2C0; --muted: #5C5C5C; --card: #FBF8EE;
+  --bad: #8A2D1F; --warn: #8A5A12;
+  --display: 'Source Serif 4', Georgia, serif;
+  --body: 'Public Sans', system-ui, -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--cream); color: var(--charcoal); font-family: var(--body); font-size: 17px; line-height: 1.45; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 900px; margin: 0 auto; padding: 14px 18px 40px; }
+.top { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.top a { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--forest); text-decoration: none; }
+.sample { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber); border: 1px solid var(--amber); border-radius: 999px; padding: 4px 9px; }
+h1 { font-family: var(--display); font-weight: 600; font-size: clamp(1.6rem, 4.4vw, 2.2rem); line-height: 1.15; margin: 16px 0 4px; }
+.sub { color: var(--muted); margin: 0 0 14px; }
+h2 { font-family: var(--display); font-weight: 600; font-size: 1.15rem; margin: 18px 0 8px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin: 10px 0 6px; }
+.stat { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+.stat .n { font-family: var(--display); font-weight: 600; font-size: 1.6rem; color: var(--forest); display: block; }
+.stat .l { font-size: 0.85rem; color: var(--muted); }
+.stat.alert .n { color: var(--bad); }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; margin: 12px 0; }
+.chip { font: inherit; font-size: 0.88rem; border: 1px solid var(--line); background: transparent; border-radius: 999px; padding: 7px 12px; cursor: pointer; color: var(--charcoal); }
+.chip[aria-pressed="true"] { background: var(--forest); border-color: var(--forest); color: #fff; }
+.list { display: grid; gap: 8px; }
+.item { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; align-items: center; }
+.item .t { font-weight: 600; }
+.item .m { font-size: 0.86rem; color: var(--muted); }
+.item .amt { font-family: var(--display); font-weight: 600; font-size: 1.15rem; text-align: right; }
+.item .acts { grid-column: 1 / -1; display: flex; gap: 8px; flex-wrap: wrap; }
+.flag { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 7px; border-radius: 4px; background: #F6E3DE; color: var(--bad); margin-left: 6px; vertical-align: middle; }
+.flag.ok { background: #E4EEE5; color: var(--forest); }
+.btn { display: inline-block; font: inherit; font-size: 0.92rem; font-weight: 600; background: var(--forest); color: #fff; border: 0; border-radius: 8px; padding: 9px 14px; cursor: pointer; text-decoration: none; }
+.btn.ghost { background: transparent; color: var(--forest); border: 1px solid var(--forest); }
+.btn.small { padding: 6px 10px; font-size: 0.85rem; }
+label { display: block; font-weight: 600; font-size: 0.9rem; margin: 10px 0 4px; }
+input, select, textarea { width: 100%; font: inherit; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--charcoal); }
+.row { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px; margin-top: 14px; }
+.foot { margin-top: 22px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 0.88rem; color: var(--muted); }
+details summary { cursor: pointer; font-weight: 600; color: var(--forest); }
+@media print { .noprint { display: none !important; } body { background: #fff; } .item, .panel { break-inside: avoid; } }

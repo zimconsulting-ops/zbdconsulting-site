@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Stock and Reorder Sample · ZBD Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600&family=Public+Sans:wght@400;600&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/demo-tools.css">
+  <style>
+    .qty { display: flex; align-items: center; gap: 6px; }
+    .qty button { width: 38px; height: 38px; font: inherit; font-size: 1.2rem; border: 1px solid var(--line); background: #fff; border-radius: 8px; cursor: pointer; }
+    .qty b { min-width: 2.2em; text-align: center; font-family: var(--display); font-size: 1.2rem; }
+    pre { white-space: pre-wrap; font-family: var(--body); font-size: 0.92rem; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; margin: 8px 0; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a href="/demo#tools">← Back to the demo</a><span class="sample">Sample data</span></div>
+  <h1>Sample Gift &amp; Garden: stock and reorder</h1>
+  <p class="sub">Count what's on the shelf, see what's running low, and send the order to each supplier in one tap.</p>
+
+  <div class="tiles">
+    <div class="stat"><span class="n" id="sItems">0</span><span class="l">Items tracked</span></div>
+    <div class="stat alert"><span class="n" id="sLow">0</span><span class="l">Running low</span></div>
+    <div class="stat"><span class="n" id="sVal">$0</span><span class="l">Stock on hand (at cost)</span></div>
+  </div>
+
+  <div class="chips" id="chips"></div>
+  <div class="list" id="list"></div>
+
+  <div class="panel">
+    <h2 style="margin-top:0">Reorder list</h2>
+    <div id="orders"></div>
+  </div>
+
+  <div class="foot">
+    Sample data, made up for this demo. A real one is set up with your own items and suppliers, can often load a sales export from your register if it offers one, and is yours to keep.
+    <p style="margin-top:8px"><button class="btn ghost small" id="reset">Reset the sample</button></p>
+  </div>
+</div>
+<script>
+(function () {
+  var KEY = 'zbds-demo-stock-v1';
+  function sample() {
+    return [
+      { n: 'Soy candle, 8 oz, cedar', v: 'Candle supplier', q: 4, min: 6, order: 24, cost: 7.5 },
+      { n: 'Soy candle, 8 oz, lavender', v: 'Candle supplier', q: 11, min: 6, order: 24, cost: 7.5 },
+      { n: 'Ceramic planter, small', v: 'Pottery supplier', q: 2, min: 5, order: 12, cost: 9 },
+      { n: 'Ceramic planter, large', v: 'Pottery supplier', q: 6, min: 3, order: 6, cost: 22 },
+      { n: 'Local honey, 12 oz', v: 'Honey farm', q: 3, min: 8, order: 24, cost: 6 },
+      { n: 'Greeting cards, assorted', v: 'Card and seed supplier', q: 40, min: 25, order: 50, cost: 1.8 },
+      { n: 'Herb seed packets', v: 'Card and seed supplier', q: 9, min: 15, order: 60, cost: 1.1 }
+    ];
+  }
+  // Fresh sample on every load: nothing typed is kept on a shared iPad.
+  var items = sample(), filter = 'all';
+  function save() {}
+  function money(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function low(x) { return x.q < x.min; }
+  function render() {
+    document.getElementById('sItems').textContent = items.length;
+    document.getElementById('sLow').textContent = items.filter(low).length;
+    document.getElementById('sVal').textContent = money(items.reduce(function (s, x) { return s + x.q * x.cost; }, 0));
+
+    var chips = document.getElementById('chips'); chips.innerHTML = '';
+    [['all', 'All items'], ['low', 'Running low']].forEach(function (c) {
+      var b = el('button', 'chip', c[1]); b.setAttribute('aria-pressed', filter === c[0]);
+      b.onclick = function () { filter = c[0]; render(); }; chips.appendChild(b);
+    });
+
+    var list = document.getElementById('list'); list.innerHTML = '';
+    items.forEach(function (x) {
+      if (filter === 'low' && !low(x)) return;
+      var it = el('div', 'item');
+      var left = el('div');
+      var t = el('div', 't', x.n); if (low(x)) t.appendChild(el('span', 'flag', 'Low'));
+      left.appendChild(t);
+      left.appendChild(el('div', 'm', x.v + ' · reorder below ' + x.min));
+      it.appendChild(left);
+      var qty = el('div', 'qty');
+      var minus = el('button', null, '−'); minus.setAttribute('aria-label', 'One less');
+      var plus = el('button', null, '+'); plus.setAttribute('aria-label', 'One more');
+      minus.onclick = function () { if (x.q > 0) { x.q--; save(); render(); } };
+      plus.onclick = function () { x.q++; save(); render(); };
+      qty.appendChild(minus); qty.appendChild(el('b', null, x.q)); qty.appendChild(plus);
+      it.appendChild(qty);
+      list.appendChild(it);
+    });
+
+    var box = document.getElementById('orders'); box.innerHTML = '';
+    var by = {};
+    items.filter(low).forEach(function (x) { (by[x.v] = by[x.v] || []).push(x); });
+    var vendors = Object.keys(by);
+    if (!vendors.length) { box.appendChild(el('p', 'm', 'Nothing is running low.')); return; }
+    vendors.forEach(function (v) {
+      var lines = by[v].map(function (x) { return x.order + ' x ' + x.n; });
+      var total = by[v].reduce(function (s, x) { return s + x.order * x.cost; }, 0);
+      box.appendChild(el('b', null, v + ' · about ' + money(total)));
+      var body = 'Hi, please send the following for Sample Gift & Garden:\n\n' + lines.join('\n') + '\n\nThank you!';
+      box.appendChild(el('pre', null, lines.join('\n')));
+      var a = el('a', 'btn small', 'Email this order');
+      a.href = 'mailto:?subject=' + encodeURIComponent('Order from Sample Gift & Garden') + '&body=' + encodeURIComponent(body);
+      var p = el('p'); p.appendChild(a); box.appendChild(p);
+    });
+  }
+  document.getElementById('reset').onclick = function () { items = sample(); save(); filter = 'all'; render(); };
+  render();
+})();
+</script>
+</body>
+</html>
