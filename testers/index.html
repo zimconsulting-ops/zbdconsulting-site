@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Help Us Test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600&family=Public+Sans:wght@400;600&family=JetBrains+Mono:wght@600&display=swap">
+<style>
+/* Workshop bench card: a short stack of numbered test cards, each with steps and a few questions */
+:root{
+ --forest:#1F4D2B; --depth:#3A6F4C; --cream:#F5F0E1; --paper:#FBF8EF; --ink:#1A1A1A; --soft:#4B4A44; --line:#D8CFB8; --amber:#B8742C;
+ --display:"Source Serif 4",Georgia,serif; --body:"Public Sans",Arial,sans-serif; --mono:"JetBrains Mono",Consolas,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font:16.5px/1.55 var(--body)}
+.wrap{max-width:760px;margin:0 auto;padding-block:28px 48px;
+ padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font:600 .72rem var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--depth)}
+h1{font:600 2.1rem/1.1 var(--display);color:var(--forest);margin:6px 0 10px;text-wrap:balance}
+h2{font:600 1.3rem/1.2 var(--display);color:var(--forest);margin:0;text-wrap:balance}
+p{margin:0 0 10px}
+.intro{max-width:62ch;color:var(--soft)}
+.box{display:grid;gap:8px;margin:16px 0;padding:14px 16px;background:var(--paper);border:1px solid var(--line)}
+.box b{color:var(--forest)}
+.tests{display:grid;gap:18px;margin-top:22px}
+details{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--forest)}
+details.soon{border-left-color:var(--line)}
+summary{list-style:none;cursor:pointer;padding:14px 16px;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.num{font:600 .8rem var(--mono);color:var(--paper);background:var(--forest);width:32px;height:32px;display:grid;place-items:center}
+.soon .num{background:var(--soft)}
+.meta{font:600 .7rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--depth);white-space:nowrap}
+.soon .meta{color:var(--amber)}
+.body{padding:0 16px 16px;display:grid;gap:12px;min-width:0}
+ol.steps{margin:0;padding-left:20px;display:grid;gap:4px}
+a{color:var(--forest);font-weight:600}
+label{display:grid;gap:4px;font-weight:600;font-size:.95rem}
+.opt{font-weight:400;color:var(--soft)}
+textarea,input[type=text],input:not([type]){font:inherit;font-weight:400;padding:8px 10px;border:1px solid var(--line);background:#fff;color:var(--ink);width:100%}
+textarea{min-height:64px;resize:vertical}
+textarea:focus,input:focus{outline:2px solid var(--forest);outline-offset:0}
+.reward{margin-top:28px;display:grid;gap:10px}
+.picks{display:grid;gap:8px}
+.pick{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;padding:10px 12px;background:var(--paper);border:1px solid var(--line);font-weight:400;cursor:pointer}
+.pick:has(input:checked){border-color:var(--forest);box-shadow:inset 4px 0 0 var(--forest)}
+.pick input{width:18px;height:18px;margin-top:3px;accent-color:var(--forest)}
+.pick span{display:grid;gap:2px;min-width:0;color:var(--soft);font-size:.93rem}
+.pick b{color:var(--ink);font-size:1rem}
+.send{margin-top:28px;padding:18px 16px;background:var(--forest);color:var(--cream);display:grid;gap:10px}
+.send h2{color:var(--cream)}
+.send p{color:#E9E2CC;margin:0}
+.send a{color:var(--cream)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+button{font:600 .95rem var(--body);padding:10px 16px;border:0;background:var(--amber);color:#fff;cursor:pointer}
+button.quiet{background:transparent;color:var(--cream);border:1px solid #9FB7A6}
+button:focus-visible{outline:3px solid var(--cream);outline-offset:2px}
+#copied{font:600 .85rem var(--mono)}
+#out{width:100%;min-height:120px;display:none}
+.small{margin-top:22px;color:var(--soft);font-size:.92rem;max-width:62ch}
+@media (max-width:480px){h1{font-size:1.7rem}summary{grid-template-columns:auto 1fr}.meta{grid-column:2}}
+</style></head>
+<body><div class="wrap">
+
+<div class="eyebrow">ZBD Solutions · Wake Forest, NC</div>
+<h1>Help us test a few things</h1>
+<p class="intro">Hi, I'm Chris Zimmerman. I run ZBD Solutions and My Everyday Driver. We're building small tools for local businesses and drivers. Before we sell any of them, we test each one on ourselves and a few people we trust. Each test below takes about 5 minutes. Do one or do them all.</p>
+
+<div class="box">
+ <div><b>1.</b> Open a test, follow the steps, and type short answers. Your phone is best, since that's how most people will see these.</div>
+ <div><b>2.</b> When you're done, tap <b>Send my answers</b> at the bottom.</div>
+ <div><b>3.</b> Blunt is better. "I didn't get it" helps more than "looks great."</div>
+</div>
+
+<div class="box">
+ <div><b>These are real forms and real emails.</b> When a test asks for it, put TEST in a name so we can spot your entry. We delete test entries when we're done. If a test signs you up for a newsletter, we'll take you off afterwards unless you tell us you'd like to stay.</div>
+</div>
+
+<form name="tester-answers" method="POST" action="/testers/thanks.html" data-netlify="true" netlify-honeypot="bot-field" id="tf">
+<input type="hidden" name="form-name" value="tester-answers">
+<p hidden><label>Leave this empty <input name="bot-field"></label></p>
+<label for="who">Your first name, so we know who sent this<input id="who" type="text" name="name" data-q="Name" autocomplete="given-name"></label>
+
+<div class="tests">
+
+<details open>
+ <summary><span class="num">1</span><h2>First look at our website</h2><span class="meta">5 min</span></summary>
+ <div class="body">
+  <ol class="steps">
+   <li>Open <a href="https://zbdconsulting.com" target="_blank" rel="noopener">zbdconsulting.com</a> on your phone. It opens in a new tab.</li>
+   <li>Read it for 30 seconds, then come back here and answer before looking again.</li>
+  </ol>
+  <label for="t1a">In one sentence, what do we sell?<textarea id="t1a" name="1-what-do-we-sell" data-q="1. What do we sell?"></textarea></label>
+  <label for="t1b">Who is it for?<textarea id="t1b" name="1-who-is-it-for" data-q="1. Who is it for?"></textarea></label>
+  <label for="t1c">Anything you didn't understand or didn't believe?<textarea id="t1c" name="1-confusing-or-hard-to-believe" data-q="1. Confusing or hard to believe"></textarea></label>
+  <label for="t1d">If you owned a business, what would you tap first, if anything?<textarea id="t1d" name="1-what-would-you-tap-first" data-q="1. What would you tap first"></textarea></label>
+ </div>
+</details>
+
+<details>
+ <summary><span class="num">2</span><h2>The local news page</h2><span class="meta">5 min</span></summary>
+ <div class="body">
+  <ol class="steps">
+   <li>Open <a href="https://news.zbdconsulting.com" target="_blank" rel="noopener">news.zbdconsulting.com</a>. It's a daily list of Wake County and NC news, picked automatically.</li>
+   <li>Scroll the whole page once, then come back here.</li>
+  </ol>
+  <label for="t2a">Which story, if any, was useful to you?<textarea id="t2a" name="2-most-useful-story" data-q="2. Most useful story"></textarea></label>
+  <label for="t2b">Would you check this once a week? Why or why not?<textarea id="t2b" name="2-weekly-reader" data-q="2. Weekly reader?"></textarea></label>
+  <label for="t2c">Anything that looked wrong, out of place, or missing?<textarea id="t2c" name="2-wrong-or-missing" data-q="2. Wrong or missing"></textarea></label>
+ </div>
+</details>
+
+<details>
+ <summary><span class="num">3</span><h2>Read a sample website report</h2><span class="meta">5 min</span></summary>
+ <div class="body">
+  <ol class="steps">
+   <li>Tap <a href="/testers/sample-report.html" target="_blank" rel="noopener">this sample report</a>. It opens in a new tab. It's the free report we made for our own website: it checks whether the site loads, works on a phone, and whether its email is set up so messages don't land in spam.</li>
+   <li>Pretend it's about your business and read it top to bottom, then come back here.</li>
+  </ol>
+  <label for="t3a">What's the first thing you'd fix, based on the report?<textarea id="t3a" name="3-first-thing-you-d-fix" data-q="3. First thing you'd fix"></textarea></label>
+  <label for="t3b">Any word or line you didn't understand?<textarea id="t3b" name="3-words-not-understood" data-q="3. Words not understood"></textarea></label>
+  <label for="t3c">Would you do what it says yourself, or want someone to walk you through it?<textarea id="t3c" name="3-do-it-or-need-help" data-q="3. Do it or need help"></textarea></label>
+ </div>
+</details>
+
+<details>
+ <summary><span class="num">4</span><h2>A free report on your own website</h2><span class="meta">2 min now</span></summary>
+ <div class="body">
+  <p>Only for a site you own or help run. We look at the public pages only, the same way as the sample, and email you the report within about a week. Put your email in the contact box at the bottom so we know where to send it.</p>
+  <label for="t4a">Website address<input id="t4a" type="text" name="4-website-to-check" data-q="4. Website to check" placeholder="example.com" inputmode="url" autocomplete="off"></label>
+  <label for="t4b">What does the business do? (one line)<input id="t4b" type="text" name="4-what-the-business-does" data-q="4. What the business does" autocomplete="off"></label>
+  <label for="t4c">Later, after you read your report: was it useful? What would you change? <span class="opt">(send this part when you get to it)</span><textarea id="t4c" name="4-was-the-report-useful" data-q="4. Was the report useful"></textarea></label>
+ </div>
+</details>
+
+<details>
+ <summary><span class="num">5</span><h2>Sign up for the car newsletter</h2><span class="meta">5 min, then check later</span></summary>
+ <div class="body">
+  <p>We want to make sure a signup really reaches you. Use an email address you check every day.</p>
+  <ol class="steps">
+   <li>Open <a href="https://myeverydaydriver.com" target="_blank" rel="noopener">myeverydaydriver.com</a> and sign up for the free newsletter on the home page.</li>
+   <li>Watch your inbox, including the spam and promotions folders, for the free 10-Minute Car Check.</li>
+   <li>When the first email arrives, scroll to the bottom and tap Unsubscribe. This is part of the test. If you'd like the emails, sign up again afterward.</li>
+  </ol>
+  <label for="t5a">How long until the first email arrived? Which folder was it in?<textarea id="t5a" name="5-newsletter-time-and-folder" data-q="5. Newsletter: time and folder"></textarea></label>
+  <label for="t5b">Did the free Car Check come with it and open on your phone?<textarea id="t5b" name="5-newsletter-car-check-opened" data-q="5. Newsletter: Car Check opened?"></textarea></label>
+  <label for="t5c">Did the unsubscribe page open, and did the emails stop?<textarea id="t5c" name="5-newsletter-unsubscribe-worked" data-q="5. Newsletter: unsubscribe worked?"></textarea></label>
+ </div>
+</details>
+
+<details>
+ <summary><span class="num">6</span><h2>Get a free car guide</h2><span class="meta">5 min</span></summary>
+ <div class="body">
+  <ol class="steps">
+   <li>Open <a href="https://myeverydaydriver.com/mechanic-red-flags" target="_blank" rel="noopener">the mechanic red flags guide</a> and fill in the form. Put TEST after your first name.</li>
+   <li>Note what happens on the page after you submit, then watch your email for anything that follows.</li>
+  </ol>
+  <label for="t6a">What did the page show after you submitted?<textarea id="t6a" name="6-guide-what-the-page-showed" data-q="6. Guide: what the page showed"></textarea></label>
+  <label for="t6b">Did you get the guide? On the page, by email, or not at all? How long did it take?<textarea id="t6b" name="6-guide-how-it-arrived" data-q="6. Guide: how it arrived"></textarea></label>
+ </div>
+</details>
+
+<details>
+ <summary><span class="num">7</span><h2>Ask us for help</h2><span class="meta">5 min, then 2 business days</span></summary>
+ <div class="body">
+  <p>This is the form a business owner would use to ask us for help. Start the business name with TEST so we know it's you.</p>
+  <ol class="steps">
+   <li>Open <a href="https://zbdconsulting.com/help" target="_blank" rel="noopener">zbdconsulting.com/help</a>. Make up the business details, but use your real email so the reply can reach you.</li>
+   <li>Note what the page says after you send it.</li>
+   <li>The page promises a reply within 2 business days. Tell us if and when one arrives.</li>
+  </ol>
+  <label for="t7a">Was anything in the form confusing or too nosy?<textarea id="t7a" name="7-help-form-confusing-or-nosy" data-q="7. Help form: confusing or nosy"></textarea></label>
+  <label for="t7b">What did the page say after you sent it?<textarea id="t7b" name="7-help-form-thank-you-page" data-q="7. Help form: thank-you page"></textarea></label>
+  <label for="t7c">Did a reply arrive? When, and in which folder? <span class="opt">(send this part when you get to it)</span><textarea id="t7c" name="7-help-form-reply-arrived" data-q="7. Help form: reply arrived?"></textarea></label>
+ </div>
+</details>
+
+<details class="soon">
+ <summary><span class="num">8</span><h2>Missed-call texts</h2><span class="meta">Coming soon</span></summary>
+ <div class="body">
+  <p>When a business misses your call, you get a text back so you're not left wondering. We're setting it up on a test line of our own. We'll send you the number and the steps when it's ready.</p>
+ </div>
+</details>
+
+</div>
+
+<label for="next" style="margin-top:22px">Last one: what should we test next, or what would you actually use? <span class="opt">(optional)</span><textarea id="next" name="what-to-test-next-would-use" data-q="What to test next / would use"></textarea></label>
+
+<section class="reward" aria-labelledby="rewardh">
+ <h2 id="rewardh">Pick a thank-you</h2>
+ <p class="intro">It's our way of saying thanks for your time. It doesn't depend on what you say, and it isn't a contest or payment for a review. One per person while we're running these tests. Skip it if you like.</p>
+ <div class="picks" role="radiogroup" aria-labelledby="rewardh">
+  <label class="pick"><input type="radio" name="thank-you-pick" value="Full report on my business website and email, with a walk-through" data-reward>
+   <span><b>A full report on your business website and email</b>Like the sample in test 3, done on your site, with a 10-minute walk-through.</span></label>
+  <label class="pick"><input type="radio" name="thank-you-pick" value="Free 20-minute call on a business question" data-reward>
+   <span><b>A free 20-minute call on a business question</b>Software, pricing, a website, a vendor's pitch.</span></label>
+  <label class="pick"><input type="radio" name="thank-you-pick" value="Second opinion on a car repair quote" data-reward>
+   <span><b>A second opinion on a car repair quote</b>Send the quote. Chris spent 25 years in auto repair and will tell you what looks fair.</span></label>
+  <label class="pick"><input type="radio" name="thank-you-pick" value="First to try new tools" data-reward>
+   <span><b>First to try new tools</b>We'll invite you to test each one free, before it's for sale.</span></label>
+  <label class="pick"><input type="radio" name="thank-you-pick" value="Coffee on us" data-reward>
+   <span><b>Coffee on us</b>Next time we meet in person.</span></label>
+  <label class="pick"><input type="radio" name="thank-you-pick" value="Nothing, happy to help" data-reward>
+   <span><b>Nothing, happy to help</b>Thank you.</span></label>
+ </div>
+</section>
+
+<label for="contact" style="margin-top:22px">Email or phone <span class="opt">(only if you'd like a reply, your website report, or your thank-you)</span><input id="contact" type="text" name="contact" data-q="Contact" autocomplete="email"></label>
+
+<section class="send" aria-labelledby="sendh">
+ <h2 id="sendh">Send your answers</h2>
+ <p>Tap Send when you're done. Waiting on an email for a test? Send what you have now, then come back and send the rest.</p>
+ <div class="row">
+  <button type="submit">Send my answers</button>
+  <button id="clear" type="button" class="quiet">Clear my answers</button>
+  <span id="copied" aria-live="polite"></span>
+ </div>
+</section>
+</form>
+
+<p class="small">Your answers are saved in this browser until you tap Send. Sending delivers them to us through our website host. We keep what you send, and we'll delete it if you ask. Please don't post your answers publicly as a review.</p>
+
+</div>
+<script>
+const fields=[...document.querySelectorAll("[data-q]")];
+const radios=[...document.querySelectorAll("[data-reward]")];
+const KEY="zbds-testers-v1";
+const msg=document.getElementById("copied");
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY)||"{}");
+ fields.forEach(f=>{if(s[f.id])f.value=s[f.id]});radios.forEach(r=>{r.checked=r.value===s.reward})}catch(e){}}
+function save(){try{const s=Object.fromEntries(fields.map(f=>[f.id,f.value]));
+ const p=radios.find(r=>r.checked);if(p)s.reward=p.value;localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+load();
+let t;document.addEventListener("input",()=>{clearTimeout(t);t=setTimeout(save,400)});
+document.addEventListener("change",e=>{if(e.target.matches("[data-reward]"))save()});
+document.getElementById("tf").addEventListener("submit",e=>{
+ const any=fields.some(f=>f.id!=="who"&&f.id!=="contact"&&f.value.trim())||radios.some(r=>r.checked);
+ if(!any){e.preventDefault();msg.textContent="Answer a question or pick a thank-you first.";return}
+ try{localStorage.removeItem(KEY)}catch(err){}
+});
+document.getElementById("clear").addEventListener("click",()=>{
+ fields.forEach(f=>f.value="");radios.forEach(r=>r.checked=false);
+ try{localStorage.removeItem(KEY)}catch(e){}
+ msg.textContent="Cleared.";
+});
+</script>
+</body></html>
